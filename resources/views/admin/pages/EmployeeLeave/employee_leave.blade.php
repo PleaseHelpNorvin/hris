@@ -12,7 +12,7 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" name="Search_leave">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <a href="{{route('request.employeeleave')}}" class="btn btn-secondary">Request Employee Leave</a>
+        {{-- <a href="{{route('request.employeeleave')}}" class="btn btn-secondary">Request Employee Leave</a> --}}
         <a href="{{route('pending.employeeleave')}}" class="btn btn-secondary" id="btn-pendingR">View Pending Request</a>
     </div>
 

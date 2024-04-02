@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Login</div>
+                    <div class="card-header">Admin Login</div>
                     <div class="card-body">
                         {{-- Login Form --}}
                         <form method="POST" action="{{ route('login-post') }}">
@@ -28,6 +28,7 @@
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Login</button>
+                                <a href="{{route('landingpage')}}" class="btn btn-primary">Back</a>
                             </div>
                             {{-- <p>Dont have an account?<a href="{{'/register'}}"> Register here!</a></p> --}}
 

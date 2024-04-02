@@ -16,8 +16,9 @@ class employeeLeave extends Controller
         return view('admin.pages.EmployeeLeave.employee_leave', compact('leaveAndIncentives'));
     }
 
-    public function requestEmployeeLeave(){
-        return view('admin.pages.EmployeeLeave.add_employee_leave');
+    public function requestEmployeeLeave($employee_id){
+        $employee = employee::where('employee_id',$employee_id)->first();
+        return view('client.pages.clientEmployeeLeave.add_employee_leave',compact('employee'));
     }
 
     public function submitLeaveRequest(Request $request){
@@ -33,7 +34,7 @@ class employeeLeave extends Controller
             'days_requested' => $request->days_requested,
             'status' => 'Pending',
         ]);
-        return redirect()->route('show.employeeleave')->with('success', 'Leave request submitted successfully.');
+        return redirect()->route('clientdashboard',['employee_id' => $request->employee_id])->with('success', 'Leave request submitted successfully.');
     }
 
     public function acceptLeaveRequest($id, $employee_id){

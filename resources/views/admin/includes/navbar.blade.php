@@ -69,11 +69,12 @@
                 href="{{'/employeeleave'}}">Employee Leave</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteNamed('show.timeintimeout','show.addtimeintimeout') ? 'active' : '' }}"
+                <a class="nav-link {{ Route::currentRouteNamed('show.timeintimeout','show.addtimeintimeout')
+                ||Route::currentRouteNamed('logs.search') ? 'active' : '' }}"
                 href="{{'/timeintimeout'}}">Time-In/Out</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteNamed('show.payrolldata') ? 'active' : '' }}"
+                <a class="nav-link {{ Route::currentRouteNamed('show.payrolldata','show.insertpayrolldata','show.insertdeductiondata') ? 'active' : '' }}"
                 href="{{'/payrolldata'}}">Payroll Data</a>
             </li>
             <li class="nav-item-logout" id="logout-btn">

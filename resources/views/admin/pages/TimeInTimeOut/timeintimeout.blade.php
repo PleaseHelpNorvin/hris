@@ -7,7 +7,7 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" name="Logs_record">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <a href="{{route('show.addtimeintimeout')}}" class="btn btn-secondary ml-2">Add Time Log</a>
+        {{-- <a href="{{route('show.addtimeintimeout')}}" class="btn btn-secondary ml-2">Add Time Log</a> --}}
     </div>
     <table class="table table-light table-striped">
         <thead>

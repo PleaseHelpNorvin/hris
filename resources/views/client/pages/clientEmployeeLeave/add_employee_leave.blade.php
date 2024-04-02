@@ -1,4 +1,4 @@
-@extends('admin.layout.default_layout')
+@extends('client.layout.default_layout')
 @section('content')
 
     <h1>Request Employee Leave</h1>
@@ -7,7 +7,9 @@
         @csrf
         <div class="form-group">
             <label for="">Employee ID</label>
-            <input type="text" class="form-control" name="employee_id" value="{{ auth()->user()->employee_id }}">
+            {{-- <input type="text" class="form-control" name="employee_id" value="{{ auth()->user()->employee_id }}"> --}}
+            <input type="text" class="form-control" name="employee_id" value="{{ $employee->employee_id }}" readonly>
+
             @error('leave_type')
                 <span class="text-danger">{{ $message }}</span>
             @enderror

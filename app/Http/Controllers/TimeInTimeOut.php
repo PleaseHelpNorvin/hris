@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\employee;
 use App\Models\timeLogs;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,17 @@ class TimeInTimeOut extends Controller
         // $timeLogs = timeLogs::all();
         return view('admin.pages.TimeInTimeOut.timeintimeout', compact('timeLogs'));
     }
-    public function showaddTimeinTimeout(){
-        return view('admin.pages.TimeInTimeOut.add_timeintimeout');
+    public function showaddTimeinTimeout($employee_id) {
+        $employee = employee::where('employee_id', $employee_id)->first();
+        // dd($employee);
+            // $employee = employee::find('EMP031');
+            
+
+        if($employee){
+            return view('client.pages.timelogs.add_timeintimeout', compact('employee'));
+        }
     }
+    
     public function storeTimeinTimeout(Request $request){
         $request->validate([
             'employee_id' => 'required',
@@ -42,7 +51,9 @@ class TimeInTimeOut extends Controller
         $timeLog->date_log = $request->date_log;
         $timeLog->save();
     
-        return redirect()->route('show.timeintimeout')->with('success', 'Time log created successfully.');
+        // return redirect()->route('clientdashboard')->with('success', 'Time log created successfully.');
+        return redirect()->route('clientdashboard', ['employee_id' => $request->employee_id])->with('success', 'Time log created successfully.');
+
     }
     
     public function LogsSearch(Request $request){

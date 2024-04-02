@@ -1,4 +1,4 @@
-@extends('admin.layout.default_layout')
+@extends('client.layout.default_layout')
 @section('content')
 <form method="POST" action="{{route('submit.addtimeintimeout')}}">
     @csrf
@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="employee_id">Employee ID:</label>
-                <input type="text" id="employee_id" name="employee_id" class="form-control form-control-lg" >
+                <input type="text" id="employee_id" name="employee_id" value="{{ $employee->employee_id }}" placeholder="{{ $employee->employee_id }}" class="form-control form-control-lg" readonly>
             </div>
             @error('employee_id')
                 <div class="alert alert-danger">{{ $message }}</div>
