@@ -14,8 +14,11 @@
 
     @media (max-width: 767.98px) {
         .offcanvas-collapse {
-            top: 3.5rem; /* Height of small navbar */
+            /* top: 3.5rem; Height of small navbar */
         }
+        .custom-height {
+    padding-bottom: 10%; /* Adjust the value as needed */
+}
     }
 
     .logout-btn {
@@ -38,6 +41,8 @@
 
 }
 </style>
+
+
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -74,7 +79,7 @@
                 href="{{'/timeintimeout'}}">Time-In/Out</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteNamed('show.payrolldata','show.insertpayrolldata','show.insertdeductiondata') ? 'active' : '' }}"
+                <a class="nav-link {{ Route::currentRouteNamed('show.payrolldata','show.insertpayrolldata','show.insertdeductiondata','deduction.show') ? 'active' : '' }}"
                 href="{{'/payrolldata'}}">Payroll Data</a>
             </li>
             <li class="nav-item-logout" id="logout-btn">

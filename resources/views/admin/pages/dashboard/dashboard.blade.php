@@ -1,7 +1,6 @@
 @extends('admin.layout.default_layout')
 @section('content')
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
 
     <style>
         .box {
@@ -10,13 +9,9 @@
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
             margin-bottom: 10px;
             text-decoration: none;
-        text-decoration-color: black;
+            text-decoration-color: black;
         }
-        .a {
-        text-decoration: none;
-        text-decoration-color: black;
-    }
-
+        
         .custom-height {
             height: 300px;
         }
@@ -27,107 +22,96 @@
             margin: 0 auto;
             position: relative;
             top: 50%;
-            /* Moves the container down by 50% of its own height */
-            left: 25%;
             transform: translateY(-50%);
         }
-
-
     </style>
 
-    </head>
-
-    <body>
-
-        <div class="row">
-            <!-- First Box -->
-            <div class="col-md-6 custom-height">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Counts</h5>
-                        <div class="row">
-                            <!-- Six boxes inside the first box -->
-                            <div class="col-4">
-                                <a href="link_for_count_1">
-                                    <div class="box">static count 1</div>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="link_for_count_2">
-                                    <div class="box">static count 2</div>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="link_for_count_3">
-                                    <div class="box">static count 3</div>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="link_for_count_4">
-                                    <div class="box">static count 4</div>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="link_for_count_5">
-                                    <div class="box">static count 5</div>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="link_for_count_6">
-                                    <div class="box">Pending Leave</div>
-                                </a>
-                            </div>
+{{-- <div class="spacer" style="padding-top:%"> --}}
+<div class="container-fluid" style="padding-top:5%; ">
+    <div class="row flex-wrap">
+        <!-- First Box -->
+        <div class="col-md-6 col-sm-12 custom-height">
+            <div class="card">
+                <div class="card-body">
+                    {{-- <h5 class="card-title">Counts</h5> --}}
+                    <div class="row">
+                        <!-- Six boxes inside the first box -->
+                        <div class="col-6 col-md-4">
+                            <a href="link_for_count_1" class="a">
+                                <div class="box">static count 1</div>
+                            </a>
                         </div>
+                        <div class="col-6 col-md-4">
+                            <a href="link_for_count_1" class="a">
+                                <div class="box">static count 1</div>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a href="link_for_count_1" class="a">
+                                <div class="box">static count 1</div>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a href="link_for_count_1" class="a">
+                                <div class="box">static count 1</div>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a href="link_for_count_1" class="a">
+                                <div class="box">static count 1</div>
+                            </a>
+                        </div>
+                        <!-- Repeat for other boxes -->
                     </div>
                 </div>
             </div>
-            <!-- Second Box -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Still static</h5>
-                        <!-- Content for the second box (e.g., pie chart) -->
-                        <div id="pie-chart">
-                            <canvas id="myChart" style="width:100%;max-width:445px; margin:  auto;"></canvas>
+        </div>
+        <!-- Second Box -->
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Still static</h5>
+                    <!-- Content for the second box (e.g., pie chart) -->
+                    <div id="pie-chart">
+                        <canvas id="myChart" style="width:100%;max-width:445px; margin: auto;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <!-- Rectangle box below the first box -->
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Departments</h5>
+                    <!-- Content for the rectangle box -->
+                    <div class="row">
+                        <!-- Column box for department count -->
+                        <div class="col-12">
+                            <div class="chart-container">
+                                <canvas id="departmentsChart"></canvas>
+                                <!-- Chart for departments -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <!-- Rectangle box below the first box -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Departments</h5>
-                        <!-- Content for the rectangle box -->
-                        <div class="row">
-                            <!-- Column box for department count -->
-                            <div class="col-8">
-                                <div class="chart-container d-flex justify-content-center align-items-center">
-                                    <canvas id="departmentsChart"></canvas>
-                                    <!-- Chart for departments -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Fourth Box -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Employee Salaries</h5>
-                        <!-- Content for the fourth box -->
-                        <canvas id="myChart1" style="width:100%;max-width:356px; margin: 0 auto;"></canvas>
-                        <!-- Center the chart -->
-
-                    </div>
+        <!-- Fourth Box -->
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Employee Salaries</h5>
+                    <!-- Content for the fourth box -->
+                    <canvas id="myChart1" style="width:100%;max-width:400px; margin: 0 auto;"></canvas>
+                    <!-- Center the chart -->
                 </div>
             </div>
         </div>
-
-
+    </div>
+</div>
         <script>
             const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
             const yValues = [55, 49, 44, 24, 15];

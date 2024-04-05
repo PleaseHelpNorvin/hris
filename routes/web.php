@@ -40,14 +40,16 @@ Route::get('/edit.employeerecord/{id}', [employeeRecord::class, 'editEmployeeRec
 Route::put('/update.employeerecord/{id}', [employeeRecord::class, 'editEmployeeRecord'])->name('update.employeerecord');
 // ==============================PayrollData=========================
 Route::get('/payrolldata', [payrollData::class, 'PayrollData'])->name('show.payrolldata');
+Route::get('/deduction-show', [payrollData::class, 'DeductionData'])->name('deduction.show');
 Route::get('/show-insert-payrolldata', [payrollData::class, 'showInsertPayrollData'])->name('show.insertpayrolldata');
 Route::post('/payrolls-store', [payrollData::class, 'storePayrollData'])->name('payrolls.store');
 // Route::get('/get-basic-pay/{employeeId}', [PayrollDataController::class, 'getBasicPay']);
 Route::get('/payrolls/deductions.search', [payrollData::class, 'searchPayrollDeduction'])->name('payrolls.deduction.search');
 Route::get('/get-basic-salary/{employeeId}', [payrollData::class, 'getBasicSalary']);
+Route::get('/get-payroll-data/{employeeId}', [payrollData::class,'getPayrollData']);
+
 Route::get('/show-insert-deductiondata', [payrollData::class, 'showInsertDeductionData'])->name('show.insertdeductiondata');
 Route::post('/deductions-store', [payrollData::class, 'storeDeductionData'])->name('deductions.store');
-
 // ==============================TimeinTimeOut=========================
 Route::get('/timeintimeout', [TimeInTimeOut::class,'TimeinTimeout'])->name('show.timeintimeout');
 Route::get('/logs-search',[TimeInTimeOut::class,'LogsSearch'])->name('logs.search');

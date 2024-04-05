@@ -18,32 +18,31 @@
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" type="email" class="form-control" name="email" required >
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password">
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Login</button>
                                 <a href="{{route('landingpage')}}" class="btn btn-primary">Back</a>
                             </div>
-                            {{-- <p>Dont have an account?<a href="{{'/register'}}"> Register here!</a></p> --}}
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
+    </div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-<style>
-    body{
-        background-color: #cdcdcd;
-    }
-</style>

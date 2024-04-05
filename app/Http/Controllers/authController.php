@@ -27,6 +27,7 @@ class authController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            
         ]);
         return redirect()->route('loginview')->with('success', 'Registration successful. You can now log in.');
     }
@@ -36,17 +37,36 @@ class authController extends Controller
         return view('admin.auth.adminLogin');
     }
 
-    public function login(Request $request){
+    // public function login(Request $request){
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+    //     $credentials = $request->only('email', 'password');
+    //     if (Auth::attempt($credentials)) {
+    //         return redirect()->intended('/dashboard');
+    //     }
+    //     return redirect()->back()->withErrors(['email' => 'Invalid credentials'])->withInput();
+    // }
+
+    public function login(Request $request)
+    {
+        // Validate email and password fields
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|email', // Check if email is present and valid
+            'password' => 'required|min:6', // Check if password is present and at least 6 characters long
         ]);
+    
+        // Attempt authentication
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('/dashboard');
         }
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials'])->withInput();
+    
+        return redirect()->back()->withErrors(['email' => 'Invalid Email','password'=>'Invalid Password'])->withInput();
     }
+    
+
 
     public function logout(){
         Session::flush();

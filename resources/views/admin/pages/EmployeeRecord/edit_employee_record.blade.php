@@ -1,6 +1,5 @@
 @extends('admin.layout.default_layout')
 @section('content')
-<h1>Edit Employee Record</h1>
 
 <form method="POST" action="{{ route('update.employeerecord', ['id' => $employee->id]) }}">
     @csrf

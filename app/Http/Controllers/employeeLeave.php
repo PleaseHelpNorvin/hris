@@ -12,7 +12,7 @@ class employeeLeave extends Controller
 {
     //
     public function EmployeeLeave(){
-        $leaveAndIncentives = EmployeeLeavesAndIncentive::latest()->simplePaginate(7);
+        $leaveAndIncentives = EmployeeLeavesAndIncentive::latest()->simplePaginate(8);
         return view('admin.pages.EmployeeLeave.employee_leave', compact('leaveAndIncentives'));
     }
 
@@ -82,7 +82,7 @@ class employeeLeave extends Controller
     }
 
     public function pendingEmployeeLeave(){
-        $pendingRequests =PendingRequest::where('status','Pending')->get();
+        $pendingRequests =PendingRequest::where('status','Pending')->simplePaginate(8);
         return view('admin.pages.EmployeeLeave.pending_employee_leave', compact('pendingRequests'));
     }
 

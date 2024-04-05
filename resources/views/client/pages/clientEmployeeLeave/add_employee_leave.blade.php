@@ -1,7 +1,7 @@
 @extends('client.layout.default_layout')
 @section('content')
 
-    <h1>Request Employee Leave</h1>
+    {{-- <h1>Request Employee Leave</h1> --}}
 
     <form method="POST" action="{{route('submit.employeeleave')}}">
         @csrf
@@ -32,7 +32,7 @@
 
         <div class="form-group">
             <label for="days_requested">Number of Days:</label>
-            <input type="number" name="days_requested" id="days_requested" class="form-control" min="1" required>
+            <input type="number" name="days_requested" id="days_requested" class="form-control" min="1" >
             @error('days_requested')
                 <span class="text-danger">{{ $message }}</span>
             @enderror

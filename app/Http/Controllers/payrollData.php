@@ -4,35 +4,63 @@ namespace App\Http\Controllers;
 
 use App\Models\payroll;
 use App\Models\employee;
+use App\Models\timeLogs;
 use App\Models\deduction;
 use Illuminate\Http\Request;
+// use App\Http\Controllers\TimeInTimeOut;
 
 class payrollData extends Controller
 {
     //
     public function PayrollData(){
         $payrolls = payroll::latest()->SimplePaginate(8);
+        // $deductions= deduction::latest()->SimplePaginate(8);
+        return view('admin.pages.PayrollData.payroll_data',compact('payrolls'));
+    }
+    
+    public function DeductionData(){
         $deductions= deduction::latest()->SimplePaginate(8);
-        return view('admin.pages.PayrollData.payroll_data',compact('payrolls','deductions'));
+
+        return view('admin.pages.PayrollData.deduction_data',compact('deductions'));
     }
 
     public function showInsertDeductionData(){
         return view('admin.pages.PayrollData.show_insert_deduction_data');
     }
 
-    public function showInsertPayrollData(Request $request){
+    // public function showInsertPayrollData(Request $request){
+    //     $employeeId = $request->input('employee_id');
+    //     $basicSalary = null;
+    //     $employeeIdCount = 0;
+    //     if ($employeeId) {
+    //         $employee = Employee::where('employee_id', $employeeId)->first();
+    //         $employeeIdCount = TimeInTimeOut::where('employee_id', $employeeId)->count();
+    //         if ($employee) {
+    //             $basicSalary = $employee->basic_salary;
+    //         }
+    //     }
+
+    //     return view('admin.pages.PayrollData.show_insert_payroll_data', compact('basicSalary'));
+    // }
+
+    public function showInsertPayrollData(Request $request)
+    {
         $employeeId = $request->input('employee_id');
+        // $employeeId ='EMP031';
         $basicSalary = null;
+        $employeeIdCount = $employeeId;
+    
         if ($employeeId) {
             $employee = Employee::where('employee_id', $employeeId)->first();
             if ($employee) {
                 $basicSalary = $employee->basic_salary;
+                $employeeIdCount = timeLogs::where('employee_id', $employeeId)->count();
             }
         }
-
-        return view('admin.pages.PayrollData.show_insert_payroll_data', compact('basicSalary'));
+        // dd($employeeIdCount);
+        return view('admin.pages.PayrollData.show_insert_payroll_data', compact('basicSalary', 'employeeIdCount'));
     }
-
+    
 
     public function storePayrollData(Request $request){
         $validatedData = $request->validate([
@@ -78,6 +106,25 @@ class payrollData extends Controller
             ]);
         }
     }
+    
+    public function getPayrollData(Request $request, $employeeId){
+    $basicSalary = null;
+    $employeeIdCount = $employeeId;
+    
+    if ($employeeId) {
+        $employee = Employee::where('employee_id', $employeeId)->first();
+        if ($employee) {
+            $basicSalary = $employee->basic_salary;
+            $employeeIdCount = timeLogs::where('employee_id', $employeeId)->count();
+        }
+    }
+
+    return response()->json([
+        'basicSalary' => $basicSalary,
+        'employeeIdCount' => $employeeIdCount
+    ]);
+}
+
     public function searchPayrollDeduction(Request $request){
         $searchQuery = $request->input('Search_deduction_payroll');
 

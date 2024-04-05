@@ -20,7 +20,7 @@
                     <div class="card-header">Client Login</div>
                     <div class="card-body">
                         {{-- Display validation errors --}}
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -28,7 +28,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
 
                         {{-- Login Form --}}
                         <form method="POST" action="{{ route('post.clientlogin') }}">
@@ -36,6 +36,13 @@
                             <div class="form-group">
                                 <label for="employee_id">Employee ID</label>
                                 <input id="employee_id" type="text" class="form-control" name="employee_id">
+                                @if ($errors->any())
+                                    {{-- <div class="alert alert-danger"> --}}
+                                        @foreach ($errors->all() as $error)
+                                            <p class="alert alert-danger">{{ $error }}</p>
+                                        @endforeach
+                                    {{-- </div> --}}
+                                @endif
                             </div>
 
                             <div class="form-group">

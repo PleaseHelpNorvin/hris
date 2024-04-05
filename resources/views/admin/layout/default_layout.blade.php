@@ -42,15 +42,35 @@
     }
 
     body {}
+/* 110vh */
+.container-content {
+    margin-top: 0%;
+    margin-left: 15%; /* Adjust as needed */
+    padding: 10px; /* Add padding to create space around the content */
+    border-radius: 5px;
+    background-color: #cdcdcd;
+    min-height: calc(107.5vh - 56px); /* Set minimum height to 100% of viewport height minus the navbar height */
+    overflow: hidden; /* Hide overflow content */
+    display: flex; /* Use flexbox to align content vertically */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
 
+/* Adjust for smaller screens */
+@media (max-width: 767.98px) {
     .container-content {
-        margin-top: 3.65%;
-        margin-left: 15%;
-        padding: 50px;
-        border-radius: 5px;
-        background-color: #cdcdcd;
-        height: 680px;
+        min-height: calc(100vh - 3.5rem); /* Height of small navbar */
+        padding-bottom: 10%; /* Adjust the value as needed */
     }
+
+    .custom-height {
+        padding-bottom: 10%; /* Adjust the value as needed */
+    }
+}
+
+
+
+
 
     .nav-item {
         margin: 2%;
@@ -97,11 +117,63 @@
     }
 
     .container-button {
-        padding: 0px 0px 5px 0px;
-        display: flex;
-        align-items: center;
-        /* Align items vertically */
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-top: 8%; /* Adjust as needed */
+        margin-left: 11.5%; /* Adjust as needed */
     }
+    .pagination-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-top: 42%; /* Adjust as needed */
+        margin-left: 50%; /* Adjust as needed */
+
+        text-align: center;
+    }
+    /* .container-Pendingbutton{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-top: 8%;
+        margin-left: 16.5%;
+    } */
+    .secondary-container {
+    display: flex;
+    height: 90%;
+    width: 99%;
+    flex-direction: column;
+    margin-top: 0px; /* Adjust margin-top as needed */
+    padding: 10px; /* Adjust padding to make it smaller */
+    /* background-color: #f8f9fa; Background color */
+    /* min-height: calc(100vh - 56px); Set the same min-height as the content container */
+    /* border-radius: 5px; Rounded corners */
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); Lighter box shadow for a subtle depth effect */
+}
+
+/* Style for the container's pending button */
+.container-Pendingbutton {
+    margin-bottom: 20px; /* Add margin-bottom to separate the button from the table */
+}
+
+/* Style for the table inside the container */
+.secondary-container table {
+    width: 100%; /* Make the table fill the container's width */
+}
+.searchDiv{
+    margin-bottom: 10px;
+    /* padding: 10; */
+    position: absolute;
+    right: 34%;
+}
+.row{
+    padding-bottom: 1%;
+}
+.addButton{
+    position: relative;
+    right: 45%;
+}
 </style>
 
 </html>

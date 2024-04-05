@@ -1,6 +1,6 @@
 @extends('admin.layout.default_layout')
 @section('content')
-<h1>This is deduction form</h1>
+{{-- <h1>This is deduction form</h1> --}}
     <div class="container">
         {{-- <h2>Add Deductions</h2> --}}
         <form method="POST" action="{{route('deductions.store')}}">

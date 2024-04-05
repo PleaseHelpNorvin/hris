@@ -7,7 +7,8 @@
             @csrf
             <div class="form-group">
                 <label for="payroll_period">Payroll Period(Days):</label>
-                <input type="text" class="form-control" id="payroll_period" name="payroll_period">
+                <input type="text" class="form-control" id="payroll_period" name="payroll_period"
+                placeholder="{{$employeeIdCount}}" value="{{$employeeIdCount}}" readonly>
                 @error('payroll_period')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -109,16 +110,16 @@
                 @enderror
             </div>
         </div>
+        <button type="submit" class="btn btn-primary" style="position: relative; left:45%;">Submit</button>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
 {{-- @endsection --}}
 {{-- @push('scripts') --}}
 
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('fetchBasicSalary').addEventListener('click', function () {
         var employeeId = document.getElementById('emp_id').value;
@@ -145,7 +146,8 @@
                 if (data.success) {
                     var basicSalary = parseFloat(data.basicSalary);
                     document.getElementById('basic_pay').value = basicSalary.toFixed(2);
-                    var ratePerHour = basicSalary / parseFloat(payrollPeriod);
+                    var ratePerDay = basicSalary / parseFloat(payrollPeriod);
+                    var ratePerHour = ratePerDay / 8;
                     var ratePerMin = ratePerHour / 60;
 
                     document.getElementById('rate_per_hr').value = ratePerHour.toFixed(2);
@@ -172,6 +174,65 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('An error occurred while fetching basic salary.');
+            });
+    });
+});
+</script> --}}
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('fetchBasicSalary').addEventListener('click', function () {
+        var employeeId = document.getElementById('emp_id').value;
+        
+        if (!employeeId) {
+            alert('Please enter an employee ID.');
+            return;
+        }
+        
+        fetch('/get-payroll-data/' + employeeId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.basicSalary !== null) {
+                    var basicSalary = parseFloat(data.basicSalary);
+                    document.getElementById('basic_pay').value = basicSalary.toFixed(2);
+                    var employeeIdCount = parseInt(data.employeeIdCount);
+                    document.getElementById('payroll_period').value = employeeIdCount;
+                    
+                    
+                    var ratePerDay = basicSalary / employeeIdCount;
+                    var ratePerHour = ratePerDay / 8;
+                    var ratePerMin = ratePerHour / 60;
+
+                    document.getElementById('rate_per_hr').value = ratePerHour.toFixed(2);
+                    document.getElementById('rate_per_min').value = ratePerMin.toFixed(2);
+
+                    // Display the salary field
+                    document.getElementById('basicSalaryResult').style.display = 'block';
+                    
+                    // Calculate Gross Pay
+                    var leave = parseFloat(document.getElementById('leave').value) || 0;
+                    var nightDifferentialTime = parseFloat(document.getElementById('night_differtime').value) || 0;
+                    var otPay = parseFloat(document.getElementById('ot_pay').value) || 0;
+
+                    var leaveValue = leave * 460;
+                    var nightDifferentialPay = (ratePerHour + ratePerMin) * nightDifferentialTime;
+                    var grossPay = basicSalary - ratePerDay - leaveValue + nightDifferentialPay + otPay;
+                    document.getElementById('gross_pay').value = grossPay.toFixed(2);
+                } else {
+                    document.getElementById('basic_pay').value = '';
+                    document.getElementById('rate_per_hr').value = '';
+                    document.getElementById('rate_per_min').value = '';
+                    document.getElementById('gross_pay').value = '';
+                    alert('Employee not found or no payroll data available.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while fetching payroll data.');
             });
     });
 });
